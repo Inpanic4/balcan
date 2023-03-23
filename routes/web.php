@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TestCompaniesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +28,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+    // Display Token to User
+    Route::get('/account', [AccountController::class, 'index'])->name('account.index');
+
+    Route::post('/account', [TestCompaniesController::class, 'store'])->name('check.token');
+
+    Route::get('/getcompanies', [TestCompaniesController::class, 'index'])->name('companies.index');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
