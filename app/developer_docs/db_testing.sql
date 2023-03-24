@@ -4340,7 +4340,7 @@ CREATE TABLE `event_user` (
 --
 
 INSERT INTO `event_user` (`id`, `event_id`, `user_id`, `paid`, `expiration`, `payment_method`, `comment`) VALUES
-(1747, 1965, NULL, 1, '', 0, 'free'),
+(1747, 1965, 1, 1, '', 0, 'free'),
 (1820, 1968, NULL, 1, '', 0, 'free'),
 (2657, 1350, NULL, 1, '', 0, ''),
 (3339, 2285, NULL, 1, '', 0, 'free'),
