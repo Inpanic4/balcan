@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestCompaniesController;
 use Illuminate\Support\Facades\Route;
@@ -20,9 +21,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -32,10 +30,10 @@ Route::middleware('auth')->group(function () {
 
     // Display Token to User
     Route::get('/account', [AccountController::class, 'index'])->name('account.index');
-
+    // User check token  Show testCompanies table to user if token correct 
     Route::post('/account', [TestCompaniesController::class, 'store'])->name('check.token');
-
-    Route::get('/getcompanies', [TestCompaniesController::class, 'index'])->name('companies.index');
+    // Show events->topics->lessons->instructors
+    Route::get('/dashboard', [EventController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
 });
 
 require __DIR__ . '/auth.php';

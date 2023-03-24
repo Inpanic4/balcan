@@ -6,21 +6,22 @@
     </x-slot>
 
     <div class="py-12">
-        {{-- todo check sessions --}}
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            @if(Session::has('message'))
-            <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
-            @endif
-            {{-- todo add some frontend --}}
-            Your token is:{{$token}}
 
-            {{-- todo check form --}}
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            {{-- Error message --}}
+            @if(Session::has('message'))
+            <p class="alert text-red-500 {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+            @endif
+            <p class="text-white"> Your token is:{{$token}}</p>
+
+
             <form method="POST"
+                  class="mt-20"
                   action="{{ route('check.token') }}">
                 @csrf
 
                 <x-input-label for="token"
-                               :value="__('token')" />
+                               :value="__('Add Token')" />
 
                 <x-text-input id="token"
                               class="block mt-1 w-full"

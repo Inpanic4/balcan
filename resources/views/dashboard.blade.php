@@ -4,13 +4,36 @@
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("You're logged in!") }}
+
+                    @foreach ($events as $event)
+                    <p>Event: {{ $event->id }}</p>
+                    <ul>
+
+                        @foreach ($event->topics->unique() as $topic)
+                        <li>topic:{{ $topic->id }}</li>
+                        <ul>
+
+                            @foreach ($topic->lessons->unique() as $lesson)
+                            <li>lesson:{{ $lesson->id }}</li>
+                            <ul>
+
+                                @foreach ($lesson->instructors->unique() as $instructor)
+                                <li>instructor:{{ $instructor->id }}</li>
+                                @endforeach
+                            </ul>
+                            @endforeach
+                        </ul>
+                        @endforeach
+                    </ul>
+                    @endforeach
+
+
                 </div>
+
             </div>
         </div>
     </div>

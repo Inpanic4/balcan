@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -16,13 +17,12 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        //todo make token unique replace 2 with something unique
 
         \App\Models\User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
             'password' => Hash::make('password'),
-            'token' => Str::random(40) . 2
+            'token' => Str::uuid(40)
         ]);
     }
 }

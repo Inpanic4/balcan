@@ -7,27 +7,23 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
+
 class TestCompaniesController extends Controller
 {
-    // public function index()
-    // {
-    //     return view('companies', [
-    //         // 'token' => Auth::user()->token
-    //     ]);
-    // }
 
     public function store(Request $request)
     {
 
+        // check token
         if ($request->token == Auth::user()->token)
 
 
-            // todo mabe add at user's session the token to protect the route
+            // a view that is returned by a controller action can only be accessed by sending a request to that controller action
             return view('companies', [
                 // get all records from test_companies table in json
-                'companies' => json_encode(DB::table('test_companies')->get())
+                'companies' => json_encode(DB::table('test_companies')->get()),
+
             ]);
-        // dd(Auth::user());
 
         else
             // Flash message if wrong token
