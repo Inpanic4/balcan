@@ -10,9 +10,13 @@ class Topic extends Model
 {
     use HasFactory;
 
-    public function lessons(): BelongsToMany
+    public function events()
     {
+        return $this->belongsToMany(Event::class, 'event_topic_lesson_instructor', 'topic_id', 'event_id');
+    }
 
-        return $this->belongsToMany(Lesson::class, 'event_topic_lesson_instructor', 'topic_id', 'lesson_id');
+    public function lessons()
+    {
+        return $this->belongsToMany(Lesson::class, 'event_topic_lesson_instructor', 'topic_id', 'lesson_id')->distinct();
     }
 }

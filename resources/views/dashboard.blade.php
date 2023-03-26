@@ -10,19 +10,19 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
                     @foreach ($events as $event)
-                    <p>Event: {{ $event->id }}</p>
+                    <p>Event: {{ $event }}</p>
                     <ul>
 
                         @foreach ($event->topics->unique() as $topic)
-                        <li>topic:{{ $topic->id }}</li>
+                        <li>topic:{{ $topic}}</li>
                         <ul>
 
                             @foreach ($topic->lessons->unique() as $lesson)
-                            <li>lesson:{{ $lesson->id }}</li>
+                            <li>lesson:{{ $lesson}}</li>
                             <ul>
 
                                 @foreach ($lesson->instructors->unique() as $instructor)
-                                <li>instructor:{{ $instructor->id }}</li>
+                                <li>instructor:{{ $instructor }}</li>
                                 @endforeach
                             </ul>
                             @endforeach

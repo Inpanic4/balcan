@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\AccountController;
-use App\Http\Controllers\EventController;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\EventController;
+use App\Http\Controllers\Api\TokenController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\TestCompaniesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,10 +31,18 @@ Route::middleware('auth')->group(function () {
 
     // Display Token to User
     Route::get('/account', [AccountController::class, 'index'])->name('account.index');
-    // User check token  Show testCompanies table to user if token correct 
-    Route::post('/account', [TestCompaniesController::class, 'store'])->name('check.token');
+
     // Show events->topics->lessons->instructors
-    Route::get('/dashboard', [EventController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
+
+    Route::post('/check-token', [AuthController::class, 'checkToken'])->name('check.token');
 });
+// API
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+// The auth:sanctum middleware is used to ensure that the user making the API request is authenticated
+Route::middleware('auth:sanctum')->post('/check-token', [TokenController::class, 'checkToken'])->name('check.token');
+
+Route::get('/dashboard', [EventController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
+
 
 require __DIR__ . '/auth.php';

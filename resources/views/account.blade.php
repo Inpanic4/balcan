@@ -15,7 +15,8 @@
             <p class="text-white"> Your token is:{{$token}}</p>
 
 
-            <form method="POST"
+            <form id="token-form"
+                  method="POST"
                   class="mt-20"
                   action="{{ route('check.token') }}">
                 @csrf
@@ -46,3 +47,18 @@
 
     </div>
 </x-app-layout>
+
+<script>
+    function submitToken() {
+        const token = document.getElementById('token-form').value;
+        axios.post('/account', { token })
+            .then(response => {
+                console.log(response.data);
+                // handle success
+            })
+            .catch(error => {
+                console.log(error.response.data);
+                // handle error
+            });
+    }
+</script>
